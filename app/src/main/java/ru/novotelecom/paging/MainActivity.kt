@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.leanback.app.VerticalGridSupportFragment
 import androidx.leanback.paging.PagingDataAdapter
-import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.FocusHighlight
-import androidx.leanback.widget.Presenter
 import androidx.leanback.widget.VerticalGridPresenter
 
 data class ItemObject(
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var chlistWrapper: FrameLayout
     lateinit var chlistFragment: VerticalGridSupportFragment
     lateinit var gridPresenter: VerticalGridPresenter
-    lateinit var itemPresenter: ChannelListItemHolder
+    lateinit var itemPresenter: ChannelListItemPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         gridPresenter.shadowEnabled = true
         chlistFragment.gridPresenter = gridPresenter
 
-        itemPresenter = ChannelListItemHolder()
+        itemPresenter = ChannelListItemPresenter()
 
 //        val adapter = ArrayObjectAdapter(itemPresenter)
 //        for (i in 1..100) {
