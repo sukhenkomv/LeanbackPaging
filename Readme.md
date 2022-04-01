@@ -9,6 +9,9 @@ https://developer.android.com/training/tv/start/libraries#leanback-paging-librar
 Разжевывается по шагам
 https://developer.android.com/topic/libraries/architecture/paging/v3-overview
 
+еще разжевывается
+https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data
+
 Надо реализовать:
 PagingSource
 Pager

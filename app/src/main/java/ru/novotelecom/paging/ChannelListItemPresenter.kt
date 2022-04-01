@@ -28,7 +28,7 @@ class ItemHolder(itemView: View) : Presenter.ViewHolder(itemView) {
     fun bind(
         item: Any?
     ) {
-        val channelTitle: String = (item as ItemObject).title
+        val channelTitle: String = (item as ChannelModel).title
         titleText.text = channelTitle
     }
 }

@@ -7,11 +7,10 @@ import androidx.leanback.app.VerticalGridSupportFragment
 import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.FocusHighlight
 import androidx.leanback.widget.VerticalGridPresenter
-
-data class ItemObject(
-    val id: Int = 0,
-    val title: String = ""
-)
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var chlistFragment: VerticalGridSupportFragment
     lateinit var gridPresenter: VerticalGridPresenter
     lateinit var itemPresenter: ChannelListItemPresenter
+
+    private val viewModel by viewModels<ChannelsViewModel> { ChannelsViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +50,17 @@ class MainActivity : AppCompatActivity() {
 //            adapter.add(ItemObject(i, "title $i"))
 //        }
 
-        val adapter: PagingDataAdapter<ItemObject> = PagingDataAdapter(presenter = itemPresenter, diffCallback = COMPARATOR)
+        val adapter: PagingDataAdapter<ChannelModel> =
+            PagingDataAdapter(presenter = itemPresenter, diffCallback = COMPARATOR)
 
         chlistFragment.adapter = adapter
+
+        lifecycleScope.launch {
+            viewModel.allChannels.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+
         chlistFragment.setSelectedPosition(0)
         chlistWrapper.bringToFront()
         chlistWrapper.requestFocus()

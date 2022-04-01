@@ -24,7 +24,7 @@
             android:id="@+id/player_activity_channels_list_fr"
             android:name="androidx.leanback.app.VerticalGridSupportFragment"
             android:layout_width="350dp"
-            android:layout_height="match_parent"
+            android:layout_height="400dp"
             android:visibility="visible" />
 
     </FrameLayout>
