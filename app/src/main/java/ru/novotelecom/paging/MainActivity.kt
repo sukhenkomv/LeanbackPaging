@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.leanback.app.VerticalGridSupportFragment
+import androidx.leanback.paging.PagingDataAdapter
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.FocusHighlight
 import androidx.leanback.widget.Presenter
@@ -44,15 +45,17 @@ class MainActivity : AppCompatActivity() {
         chlistFragment.gridPresenter = gridPresenter
 
         itemPresenter = ChannelListItemHolder()
-        val adapter = ArrayObjectAdapter(itemPresenter)
-        for (i in 1..100) {
-            adapter.add(ItemObject(i, "title $i"))
-        }
-//        runOnUiThread {
+
+//        val adapter = ArrayObjectAdapter(itemPresenter)
+//        for (i in 1..100) {
+//            adapter.add(ItemObject(i, "title $i"))
+//        }
+
+        val adapter: PagingDataAdapter<ItemObject> = PagingDataAdapter(presenter = itemPresenter, diffCallback = COMPARATOR)
+
         chlistFragment.adapter = adapter
         chlistFragment.setSelectedPosition(0)
         chlistWrapper.bringToFront()
         chlistWrapper.requestFocus()
-//        }
     }
 }
